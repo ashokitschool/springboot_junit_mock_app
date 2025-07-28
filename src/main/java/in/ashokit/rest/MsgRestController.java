@@ -15,6 +15,8 @@ public class MsgRestController {
 	@GetMapping("/welcome")
 	public String welcomeMsg() {
 
+		msgService.sendEmail();
+
 		String welcomeMsg = msgService.getWelcomeMsg();
 
 		String formattedMsg = null;

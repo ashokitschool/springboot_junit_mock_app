@@ -10,6 +10,11 @@ public class MsgService {
 		return msg;
 	}
 
+	public void sendEmail() {
+		System.out.println("sendEmail() real method called.......");
+		// logic
+	}
+
 	public String getGreetMsg() {
 		String msg = "Good Mrng..!!";
 		return msg;

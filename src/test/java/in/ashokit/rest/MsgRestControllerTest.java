@@ -1,5 +1,6 @@
 package in.ashokit.rest;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,6 +30,9 @@ public class MsgRestControllerTest {
 	@Test
 	public void testWelcomeMsg1() throws Exception {
 
+		// defining mock obj void method behaviour
+		doNothing().when(msgService).sendEmail();
+
 		// defining mock obj method behaviour for unit testing
 		when(msgService.getWelcomeMsg()).thenReturn("Dummy Text");
 
@@ -47,6 +51,9 @@ public class MsgRestControllerTest {
 
 	@Test
 	public void testWelcomeMsg2() throws Exception {
+
+		// defining mock obj void method behaviour
+		doNothing().when(msgService).sendEmail();
 
 		// defining mock obj method behaviour for unit testing
 		when(msgService.getWelcomeMsg()).thenReturn(null);
@@ -67,15 +74,17 @@ public class MsgRestControllerTest {
 	@Test
 	public void testWelcomeMsg3() {
 
+		// defining mock obj void method behaviour
+		doNothing().when(msgService).sendEmail();
+
 		// defining mock obj method behaviour for unit testing
 		when(msgService.getWelcomeMsg()).thenThrow(RuntimeException.class);
 
 		MockHttpServletRequestBuilder req = MockMvcRequestBuilders.get("/welcome");
 
 		try {
-			mockMvc.perform(req)
-				   .andExpect(status().isInternalServerError())
-				   .andExpect(content().string("Exception Occured"));
+			mockMvc.perform(req).andExpect(status().isInternalServerError())
+					.andExpect(content().string("Exception Occured"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

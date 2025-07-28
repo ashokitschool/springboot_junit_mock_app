@@ -18,7 +18,9 @@ public class CustomerRestController {
 
 	@PostMapping("/customer")
 	public ResponseEntity<String> saveCustomer(@RequestBody Customer customer) {
+		
 		boolean isSaved = customerService.saveCutomer(customer);
+		
 		if (isSaved) {
 			return new ResponseEntity<>("Customer Saved", HttpStatus.CREATED);
 		} else {
